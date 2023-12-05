@@ -1,7 +1,7 @@
 {
-  "name": "nodebird",
+  "name": "project-lab",
   "version": "0.0.1",
-  "description": "익스프레스로 만드는 SNS 서비스",
+  "description": "프로젝트 랩",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app"
@@ -19,7 +19,6 @@
     "mysql2": "^2.2.5",
     "nunjucks": "^3.2.2",
     "passport": "^0.6.0",
-    "passport-kakao": "^1.0.0",
     "passport-local": "^1.0.0",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
