@@ -1,38 +1,42 @@
 const Sequelize = require("sequelize");
 
-class User extends Sequelize.Model {
+class Member extends Sequelize.Model {
   static initiate(sequelize) {
-    User.init(
+    Member.init(
       {
+        name: {
+          type: Sequelize.STRING(40),
+          allowNull: true,
+          unique: true,
+        },
         email: {
           type: Sequelize.STRING(40),
           allowNull: true,
           unique: true,
         },
-        nick: {
-          type: Sequelize.STRING(15),
-          allowNull: false,
-        },
-        password: {
-          type: Sequelize.STRING(100),
-          allowNull: true,
-        },
         snsId: {
           type: Sequelize.STRING(30),
           allowNull: true,
         },
-        authority: {
-          type: Sequelize.ENUM("SUPER", "ADMIN", "USER"),
+        userId: {
+          type: Sequelize.INTEGER,
           allowNull: false,
-          defaultValue: "USER",
+        },
+        position: {
+          type: Sequelize.STRING(30),
+          allowNull: true,
+        },
+        field: {
+          type: Sequelize.STRING(100),
+          allowNull: true,
         },
       },
       {
         sequelize,
         timestamps: true,
         underscored: false,
-        modelName: "User",
-        tableName: "users",
+        modelName: "Member",
+        tableName: "members",
         paranoid: true,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -41,9 +45,8 @@ class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.hasMany(db.Post);
-    db.User.hasOne(db.Member, { foreignKey: "userId", sourceKey: "id" });
+    db.Member.belongsTo(db.User, { foreignKey: "userId", targetKey: "id" });
   }
 }
 
-module.exports = User;
+module.exports = Member;
