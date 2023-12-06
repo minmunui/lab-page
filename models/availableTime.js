@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
+// AvailableTime 모델
 class AvailableTime extends Model {
   static initiate(sequelize) {
     AvailableTime.init(
@@ -39,8 +40,8 @@ class AvailableTime extends Model {
   }
 
   static associate(db) {
-    AvailableTime.belongsTo(db.User, { foreignKey: "userId" });
-    AvailableTime.belongsTo(db.Group, { foreignKey: "groupId" });
+    AvailableTime.belongsTo(db.User, { foreignKey: "userId", as: "user" });
+    AvailableTime.belongsTo(db.Group, { foreignKey: "groupId", as: "group" });
   }
 }
 

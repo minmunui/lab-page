@@ -17,10 +17,6 @@ class User extends Sequelize.Model {
           type: Sequelize.STRING(100),
           allowNull: true,
         },
-        snsId: {
-          type: Sequelize.STRING(30),
-          allowNull: true,
-        },
         authority: {
           type: Sequelize.ENUM("SUPER", "ADMIN", "USER"),
           allowNull: false,
@@ -41,7 +37,10 @@ class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    User.hasMany(db.AvailableTime, { foreignKey: "userId" });
+    User.hasMany(db.AvailableTime, {
+      foreignKey: "userId",
+      as: "userAvailableTimes",
+    });
     User.belongsToMany(db.Group, {
       through: "GroupUser",
       foreignKey: "userId",
