@@ -41,8 +41,11 @@ class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.hasMany(db.Post);
-    db.User.hasOne(db.Member, { foreignKey: "userId", sourceKey: "id" });
+    User.hasMany(db.AvailableTime, { foreignKey: "userId" });
+    User.belongsToMany(db.Group, {
+      through: "GroupUser",
+      foreignKey: "userId",
+    });
   }
 }
 
