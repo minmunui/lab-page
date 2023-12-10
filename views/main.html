@@ -15,16 +15,22 @@
     </thead>
     <tbody>
     {% for group in groups %}
-    <tr data-id="{{room.id}}">
+    <tr data-id="{{group.id}}">
       <td>{{group.name}}</td>
       <td>{{'비밀방' if group.password else '공개방'}}</td>
       <td>{{group.max}}</td>
-      <td style="color:{{room.owner}}">{{group.owner}}</td>
+      <td style="color:{{room.owner}}">{{group.owner.nick}}</td>
       <td>
         <button
-          data-password="{{'true' if room.password else 'false'}}"
-          data-id="{{room.id}}"
+          data-password="{{'true' if group.password else 'false'}}"
+          data-id="{{group.id}}"
           class="join-btn"
+          onclick="if (this.dataset.password === 'true') {
+            const password = prompt('비밀번호를 입력하세요');
+            location.href = `/group/${this.dataset.id}?password=${password}`;
+          } else {
+            location.href = `/group/${this.dataset.id}`;
+          }"
         >입장
         </button>
       </td>
@@ -38,39 +44,39 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io.connect('http://localhost:8005/room', {
-    path: '/socket.io',
+  const socket = io.connect("http://localhost:8005/room", {
+    path: "/socket.io"
   });
 
-  socket.on('newRoom', (data) => {
-    const tr = document.createElement('tr');
-    let td = document.createElement('td');
+  socket.on("newRoom", (data) => {
+    const tr = document.createElement("tr");
+    let td = document.createElement("td");
     td.textContent = data.title;
     tr.appendChild(td);
-    td = document.createElement('td');
-    td.textContent = data.password ? '비밀방' : '공개방';
+    td = document.createElement("td");
+    td.textContent = data.password ? "비밀방" : "공개방";
     tr.appendChild(td);
-    td = document.createElement('td');
+    td = document.createElement("td");
     td.textContent = data.max;
     tr.appendChild(td);
-    td = document.createElement('td');
+    td = document.createElement("td");
     td.style.color = data.owner;
     td.textContent = data.owner;
     tr.appendChild(td);
-    td = document.createElement('td');
-    const button = document.createElement('button');
-    button.textContent = '입장';
-    button.dataset.password = data.password ? 'true' : 'false';
+    td = document.createElement("td");
+    const button = document.createElement("button");
+    button.textContent = "입장";
+    button.dataset.password = data.password ? "true" : "false";
     button.dataset.id = data.id;
-    button.addEventListener('click', addBtnEvent);
+    button.addEventListener("click", addBtnEvent);
     td.appendChild(button);
     tr.appendChild(td);
     tr.dataset.id = data.insertId;
-    document.querySelector('table tbody').appendChild(tr);
+    document.querySelector("table tbody").appendChild(tr);
   });
 
-  socket.on('removeRoom', (data) => {
-    document.querySelectorAll('tbody tr').forEach((tr) => {
+  socket.on("removeRoom", (data) => {
+    document.querySelectorAll("tbody tr").forEach((tr) => {
       if (tr.dataset.id === data) {
         tr.parentNode.removeChild(tr);
       }
@@ -78,16 +84,18 @@
   });
 
   function addBtnEvent(e) {
-    if (e.target.dataset.password === 'true') {
-      const password = prompt('비밀번호를 입력하세요');
-      location.href = `/room/${e.target.dataset.id}?password=${password}`;
+    console.log(e.target.dataset.id)
+    if (e.target.dataset.password === "true") {
+      const password = prompt("비밀번호를 입력하세요");
+      location.href = `/group/${e.target.dataset.id}?password=${password}`;
     } else {
-      location.href = `/room/${e.target.dataset.id}`;
+      location.href = `/group/${e.target.dataset.id}`;
     }
   }
 
-  document.querySelectorAll('.join-btn').forEach((btn) => {
-    btn.addEventListener('click', addBtnEvent);
+  document.querySelectorAll(".join-btn").forEach((btn) => {
+    console.log(btn.innerHTML)
+    btn.addEventListener("click", addBtnEvent);
   });
 </script>
 {% endblock %}
@@ -95,8 +103,8 @@
 {% block script %}
 <script>
   window.onload = () => {
-    if (new URL(location.href).searchParams.get('error')) {
-      alert(new URL(location.href).searchParams.get('error'));
+    if (new URL(location.href).searchParams.get("error")) {
+      alert(new URL(location.href).searchParams.get("error"));
     }
   };
 </script>
