@@ -7,6 +7,8 @@ const {
   renderCreateGroup,
 } = require("../controllers/page");
 
+const { createGroup } = require("../controllers/group");
+
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -22,6 +24,8 @@ router.get("/profile", isLoggedIn, renderProfile);
 router.get("/join", isNotLoggedIn, renderJoin);
 
 router.get("/group", isLoggedIn, renderCreateGroup);
+
+router.post("/group", isLoggedIn, createGroup);
 
 router.get("/", renderMain);
 
