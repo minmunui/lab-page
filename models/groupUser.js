@@ -17,6 +17,16 @@ class GroupUser extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        userColor: {
+          type: DataTypes.STRING(7),
+          allowNull: false,
+          defaultValue: "#000000",
+        },
+        role: {
+          type: DataTypes.STRING(10),
+          allowNull: false,
+          defaultValue: "member",
+        },
       },
       {
         sequelize,

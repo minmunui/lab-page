@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<fieldset>
+  <legend>일정 그룹 만들기</legend>
+  <form action="/group" method="post">
+    <div>
+      <label for="title">그룹 제목</label>
+      <input type="text" name="title" placeholder="그룹 제목" id="title" required>
+    </div>
+    <div>
+      <label for="max">수용 인원(최소 2명)</label>
+      <input type="number" name="max" placeholder="수용 인원(최소 2명)" min="2" value="10"
+             required
+             id="max"
+             oninput="this.value = Math.round(this.value / 10) * 10"
+      >
+    </div>
+    <div>
+      <label for="pw">비밀번호(없으면 공개방)</label>
+      <input type="password" name="password" placeholder="비밀번호(없으면 공개방)" id="pw">
+    </div>
+    <div>
+      <label for="description">그룹 설명</label>
+      <input type="text" name="description" placeholder="그룹 설명" id="description">
+    </div>
+    <div>
+      <button type="submit">생성</button>
+    </div>
+  </form>
+</fieldset>
+{% endblock %}

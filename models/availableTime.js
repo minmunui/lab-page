@@ -40,7 +40,7 @@ class AvailableTime extends Model {
   }
 
   static associate(db) {
-    AvailableTime.belongsTo(db.User, { foreignKey: "userId", as: "user" });
+    AvailableTime.belongsTo(db.GroupUser, { foreignKey: "userId", as: "user" });
     AvailableTime.belongsTo(db.Group, { foreignKey: "groupId", as: "group" });
   }
 }

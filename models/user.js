@@ -4,6 +4,12 @@ class User extends Sequelize.Model {
   static initiate(sequelize) {
     User.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          allowNull: false,
+        },
         email: {
           type: Sequelize.STRING(40),
           allowNull: true,
@@ -17,12 +23,13 @@ class User extends Sequelize.Model {
           type: Sequelize.STRING(100),
           allowNull: true,
         },
-        authority: {
+        role: {
           type: Sequelize.ENUM("SUPER", "ADMIN", "USER"),
           allowNull: false,
           defaultValue: "USER",
         },
       },
+
       {
         sequelize,
         timestamps: true,
@@ -45,6 +52,7 @@ class User extends Sequelize.Model {
       through: "GroupUser",
       foreignKey: "userId",
     });
+    User.hasMany(db.Group, { foreignKey: "ownerId", as: "ownerGroups" });
   }
 }
 

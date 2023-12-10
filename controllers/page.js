@@ -11,7 +11,13 @@ exports.renderJoin = (req, res) => {
 
 exports.renderMain = async (req, res, next) => {
   try {
-    const groups = await Group.findAll();
+    const groups = await Group.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
     console.log("[controller/page.js 15] allGroups", groups);
 
     res.render("main", {
@@ -24,24 +30,6 @@ exports.renderMain = async (req, res, next) => {
   }
 };
 
-exports.renderHashtag = async (req, res, next) => {
-  const query = req.query.hashtag;
-  if (!query) {
-    return res.redirect("/");
-  }
-  try {
-    const hashtag = await Hashtag.findOne({ where: { title: query } });
-    let posts = [];
-    if (hashtag) {
-      posts = await hashtag.getPosts({ include: [{ model: User }] });
-    }
-
-    return res.render("main", {
-      title: `${query} | NodeBird`,
-      twits: posts,
-    });
-  } catch (error) {
-    console.error(error);
-    return next(error);
-  }
+exports.renderCreateGroup = (req, res) => {
+  res.render("createGroup");
 };

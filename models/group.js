@@ -22,6 +22,14 @@ class Group extends Model {
           type: DataTypes.STRING(100),
           allowNull: true,
         },
+        maxMember: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        ownerId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
 
       {
@@ -41,6 +49,7 @@ class Group extends Model {
       foreignKey: "groupId",
     });
     Group.hasMany(db.AvailableTime, { foreignKey: "groupId" });
+    Group.belongsTo(db.User, { foreignKey: "ownerId", as: "owner" });
   }
 }
 
