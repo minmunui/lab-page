@@ -14,4 +14,10 @@ router.post("/login", isNotLoggedIn, login);
 // GET /auth/logout
 router.get("/logout", isLoggedIn, logout);
 
+// GET /group/:id
+// router.get("/group/:id", isLoggedIn, renderGroupDetail);
+
+// POST /group
+// router.post("/group", isLoggedIn, createGroup);
+
 module.exports = router;

@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
-
 class User extends Sequelize.Model {
   static initiate(sequelize) {
     User.init(
@@ -49,7 +48,7 @@ class User extends Sequelize.Model {
       as: "userAvailableTimes",
     });
     User.belongsToMany(db.Group, {
-      through: "GroupUser",
+      through: db.GroupUser,
       foreignKey: "userId",
     });
     User.hasMany(db.Group, { foreignKey: "ownerId", as: "ownerGroups" });

@@ -14,7 +14,6 @@ module.exports = () => {
       where: { id },
     })
       .then((user) => {
-        console.log("user", user);
         done(null, user);
       })
       .catch((err) => done(err));

@@ -25,7 +25,8 @@
           data-password="{{'true' if group.password else 'false'}}"
           data-id="{{group.id}}"
           class="join-btn"
-          onclick="if (this.dataset.password === 'true') {
+          onclick="
+          if (this.dataset.password === 'true') {
             const password = prompt('비밀번호를 입력하세요');
             location.href = `/group/${this.dataset.id}?password=${password}`;
           } else {

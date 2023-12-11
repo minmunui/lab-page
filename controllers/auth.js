@@ -4,7 +4,6 @@ const User = require("../models/user");
 
 exports.join = async (req, res, next) => {
   const { email, nick, password } = req.body;
-  console.log("join", email, nick, password);
   try {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
