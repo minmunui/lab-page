@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .my-label {
+    @apply text-lg font-semibold text-gray-700;
+  }
+}
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; height: 100%; }
 .btn {

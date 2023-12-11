@@ -1,32 +1,35 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<fieldset>
-  <legend>일정 그룹 만들기</legend>
+<fieldset class="w-full flex justify-center timeline">
+  <div class="max-w-xl border-2 border-gray-500 rounded-2xl p-6 gap-4 flex flex-col">
+  <legend class="text-2xl font-bold">일정 그룹 만들기</legend>
   <form action="/group" method="post">
-    <div>
-      <label for="name">그룹 이름</label>
+    <div class="w-full flex justify-between">
+      <label for="name" class="my-label">그룹 이름</label>
       <input type="text" name="name" placeholder="그룹 제목" id="name" required>
     </div>
-    <div>
-      <label for="max">수용 인원(최소 2명)</label>
+    <div class="w-full flex justify-between">
+      <label for="max" class="my-label">수용 인원(최소 2명)</label>
       <input type="number" name="max" placeholder="수용 인원(최소 2명)" min="2" value="10"
              required
              id="max"
              oninput="this.value = Math.round(this.value / 10) * 10"
+             class="p-[0.6rem]"
       >
     </div>
-    <div>
-      <label for="pw">비밀번호(없으면 공개방)</label>
+    <div class="w-full flex justify-between">
+      <label for="pw" class="my-label">비밀번호(없으면 공개방)</label>
       <input type="password" name="password" placeholder="비밀번호(없으면 공개방)" id="pw">
     </div>
-    <div>
-      <label for="description">그룹 설명</label>
+    <div class="w-full flex justify-between">
+      <label for="description" class="my-label">그룹 설명</label>
       <input type="text" name="description" placeholder="그룹 설명" id="description">
     </div>
-    <div>
-      <button type="submit">생성</button>
+    <div class="w-full flex justify-between">
+      <button type="submit" class="border-red-800 bg-red-400 text-white text-xl font-bold p-4 rounded-lg">생성</button>
     </div>
   </form>
+  </div>
 </fieldset>
 {% endblock %}
