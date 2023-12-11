@@ -104,9 +104,6 @@ exports.renderGroup = async (req, res, next) => {
       );
     });
 
-    users.forEach((user) =>
-      console.log(`user: ${user.nick}`, `availableTime: ${user.availableTime}`),
-    );
     res.render("group", { group, times, users });
   } catch (err) {
     console.error(err);

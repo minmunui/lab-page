@@ -4,7 +4,7 @@
 <div class="group-layout flex flex-col gap-2">
   <header class="w-full border-2 border-gray-500 rounded-lg">
     <div class="group-info">
-      <div class="title text-2xl font-bold text-center">
+      <div class="title text-2xl font-bold text-center" data-id="{{group.id}}">
         {{group.name}}
       </div>
       <div class="owner text-center">
@@ -15,14 +15,14 @@
       </div>
     </div>
   </header>
-  <div class="main flex flex-col md:flex-row">
-    <div class="members flex flex-col max-w-4xl md:w-1/4">
+  <div class="main flex flex-col md:flex-row gap-2">
+    <div class="members flex flex-col max-w-4xl md:w-1/4 border-2 border-gray-500 rounded-lg p-2">
       <div class="label font-semibold text-lg flex justify-between">
         <span>멤버 인원</span><span>{{group.Users.length}} / {{group.maxMember}}</span>
       </div>
       <div class="members">
         {% for user in group.Users %}
-        <div class="member text-center">
+        <div class="member text-center" data-id="{{user.id}}">
           {{user.nick}}
         </div>
         {% endfor %}
@@ -46,12 +46,15 @@
         <div class="schedule-body flex justify-around w-full">
           {% for user in users %}
           <div class="member text-center w-full">
-            {{user.nick}}
+            <div class="member-label" data-id="{{user.id}}">{{user.nick}}</div>
+
             {% for available in user.availableTime %}
             {% if available %}
-            <div class="available-time bg-green-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full" data-id="{{loop.index}}"></div>
+            <div class="available-time bg-green-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full"
+                 data-id="{{loop.index}}"></div>
             {% else %}
-            <div class="available-time bg-red-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full" data-id="{{loop.index}}"></div>
+            <div class="available-time bg-red-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full"
+                 data-id="{{loop.index}}"></div>
             {% endif %}
             {% endfor %}
           </div>
@@ -64,5 +67,36 @@
 {% endblock %}
 
 {% block script %}
-
+<script>
+  const availableTimes = document.querySelectorAll(".available-time");
+  availableTimes.forEach((availableTime) => {
+    availableTime.addEventListener("click", () => {
+      const time = availableTime.dataset.id-1;
+      const member = availableTime.parentElement.querySelector(".member-label").dataset.id;
+      const group = document.querySelector(".title").dataset.id;
+      const data = {
+        time,
+        member,
+        group
+      };
+      console.log(data);
+      fetch("/group", {
+        method: "FETCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      }).then((data) => {
+        if (data.success) {
+          availableTime.classList.toggle("bg-green-400");
+          availableTime.classList.toggle("bg-red-400");
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}
