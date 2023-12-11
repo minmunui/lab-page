@@ -15,17 +15,14 @@ class AvailableTime extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        dayOfWeek: {
-          type: DataTypes.STRING,
+        groupId: {
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
-        startTime: {
-          type: DataTypes.TIME,
+        availableTime: {
+          type: DataTypes.INTEGER,
           allowNull: false,
-        },
-        endTime: {
-          type: DataTypes.TIME,
-          allowNull: false,
+          defaultValue: 0,
         },
       },
       {
@@ -40,7 +37,7 @@ class AvailableTime extends Model {
   }
 
   static associate(db) {
-    AvailableTime.belongsTo(db.GroupUser, { foreignKey: "userId", as: "user" });
+    AvailableTime.belongsTo(db.User, { foreignKey: "userId", as: "user" });
     AvailableTime.belongsTo(db.Group, { foreignKey: "groupId", as: "group" });
   }
 }

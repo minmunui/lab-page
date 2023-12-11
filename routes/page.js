@@ -6,15 +6,20 @@ const {
   renderMain,
   renderCreateGroup,
 } = require("../controllers/page");
-const { createGroup, renderGroup } = require("../controllers/group");
+const {
+  createGroup,
+  renderGroup,
+  getBelongingGroup,
+} = require("../controllers/group");
 
 const router = express.Router();
 
-router.use((req, res, next) => {
+router.use(async (req, res, next) => {
   res.locals.user = req.user;
-  res.locals.followerCount = req.user?.Followers?.length || 0;
-  res.locals.followingCount = req.user?.Followings?.length || 0;
-  res.locals.followingIdList = req.user?.Followings?.map((f) => f.id) || [];
+  if (req.user) {
+    const belongingGroup = await getBelongingGroup(req.user.id);
+    res.locals.belongingGroup = belongingGroup[0].Groups;
+  }
   next();
 });
 
@@ -29,7 +34,5 @@ router.get("/group/:id", isLoggedIn, renderGroup);
 router.post("/group", isLoggedIn, createGroup);
 
 router.get("/", renderMain);
-
-//TODO : group page
 
 module.exports = router;

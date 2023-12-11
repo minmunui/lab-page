@@ -1,27 +1,68 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="group-layout">
-  <header class="w-full border-2 border-gray-500 rounded-sm">
+<div class="group-layout flex flex-col gap-2">
+  <header class="w-full border-2 border-gray-500 rounded-lg">
     <div class="group-info">
-      <div class="title">
+      <div class="title text-2xl font-bold text-center">
         {{group.name}}
       </div>
-      <div class="description">
-        {{group.description}}
-      </div>
-    </div>
-    <div class="members">
-      <div class="label">
-        멤버
-      </div>
-      <div class="value">
-      {{group.Users.length}} / {{group.maxMember}}
+      <div class="owner text-center">
+        그룹장 : {{group.owner.nick}}
+        <div class="description text-center">
+          {{group.description}}
+        </div>
       </div>
     </div>
   </header>
+  <div class="main flex flex-col md:flex-row">
+    <div class="members flex flex-col max-w-4xl md:w-1/4">
+      <div class="label font-semibold text-lg flex justify-between">
+        <span>멤버 인원</span><span>{{group.Users.length}} / {{group.maxMember}}</span>
+      </div>
+      <div class="members">
+        {% for user in group.Users %}
+        <div class="member text-center">
+          {{user.nick}}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="calender w-full md:w-3/4">
+      <div class="label text-center text-2xl font-bold">
+        가능한 시간대
+      </div>
+      <div class="schedule flex justify-between text-center">
+        <div class="scehdule-header flex justify-around">
+          <div class="time">
+            <div class="time-label">시간</div>
+            <div class="time-content">
+              {% for time in times %}
+              <div class="time-item text-center">{{time}}</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="schedule-body flex justify-around w-full">
+          {% for user in users %}
+          <div class="member text-center w-full">
+            {{user.nick}}
+            {% for available in user.availableTime %}
+            {% if available %}
+            <div class="available-time bg-green-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full" data-id="{{loop.index}}"></div>
+            {% else %}
+            <div class="available-time bg-red-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full" data-id="{{loop.index}}"></div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
 
 {% block script %}
+
 {% endblock %}

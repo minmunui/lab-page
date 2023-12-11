@@ -20,7 +20,6 @@ exports.renderMain = async (req, res, next) => {
         },
       ],
     });
-    // console.log("[controller/page.js 15] allGroups", groups);
     res.render("main", {
       title: "Time To Meet",
       groups,
