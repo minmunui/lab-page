@@ -10,6 +10,7 @@ const {
   createGroup,
   renderGroup,
   getBelongingGroup,
+  patchTime,
 } = require("../controllers/group");
 
 const router = express.Router();
@@ -32,6 +33,8 @@ router.get("/group", isLoggedIn, renderCreateGroup);
 router.get("/group/:id", isLoggedIn, renderGroup);
 
 router.post("/group", isLoggedIn, createGroup);
+
+router.patch("/time", isLoggedIn, patchTime);
 
 router.get("/", renderMain);
 

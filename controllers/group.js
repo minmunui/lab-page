@@ -128,3 +128,44 @@ exports.createGroup = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.patchTime = async (req, res, next) => {
+  // body: { time: 0, userId: 1, groupId: 1 }
+  try {
+    const { time, userId, groupId } = req.body;
+    console.log(`time: ${time}, userId: ${userId}, groupId: ${groupId}`);
+    const availableTime = await AvailableTime.findOne({
+      where: {
+        userId,
+        groupId,
+      },
+    });
+    console.log(`availableTime: ${availableTime.dataValues.availableTime}`);
+    const binaryAvailableTime = to24number(
+      availableTime.availableTime.toString(2),
+    );
+    const newBinaryAvailableTime = binaryAvailableTime.split("");
+    newBinaryAvailableTime[time] =
+      newBinaryAvailableTime[time] === "1" ? "0" : "1";
+    await AvailableTime.update(
+      {
+        availableTime: parseInt(newBinaryAvailableTime.join(""), 2),
+      },
+      {
+        where: {
+          userId,
+          groupId,
+        },
+      },
+    );
+    res
+      .status(200)
+      .json({
+        message: "success",
+        available: newBinaryAvailableTime[time] === "1",
+      });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};

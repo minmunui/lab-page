@@ -50,10 +50,10 @@
 
             {% for available in user.availableTime %}
             {% if available %}
-            <div class="available-time bg-green-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full"
+            <div class="available-time bg-green-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full hover:border-blue-400"
                  data-id="{{loop.index}}"></div>
             {% else %}
-            <div class="available-time bg-red-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full"
+            <div class="available-time bg-red-400 h-[1.5rem] border-[0.1rem] border-gray-700 w-full hover:border-blue-400"
                  data-id="{{loop.index}}"></div>
             {% endif %}
             {% endfor %}
@@ -69,33 +69,43 @@
 {% block script %}
 <script>
   const availableTimes = document.querySelectorAll(".available-time");
+  const patchTimeCallback = (availableTime) => {
+    const time = availableTime.dataset.id-1;
+    const member = availableTime.parentElement.querySelector(".member-label").dataset.id;
+    const group = document.querySelector(".title").dataset.id;
+    const data = {
+      time : time,
+      userId : member,
+      groupId : group
+    };
+    console.log(data);
+    fetch("/time", {
+    method: "PATCH",
+      headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+  }).then((data) => {
+    if (data.available) {
+      availableTime.classList.remove("bg-red-400");
+      availableTime.classList.add("bg-green-400");
+    } else {
+      availableTime.classList.remove("bg-green-400");
+      availableTime.classList.add("bg-red-400");
+    }
+  });
+  }
   availableTimes.forEach((availableTime) => {
-    availableTime.addEventListener("click", () => {
-      const time = availableTime.dataset.id-1;
-      const member = availableTime.parentElement.querySelector(".member-label").dataset.id;
-      const group = document.querySelector(".title").dataset.id;
-      const data = {
-        time,
-        member,
-        group
-      };
-      console.log(data);
-      fetch("/group", {
-        method: "FETCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      }).then((data) => {
-        if (data.success) {
-          availableTime.classList.toggle("bg-green-400");
-          availableTime.classList.toggle("bg-red-400");
-        }
-      });
+    availableTime.addEventListener("mousedown", () => patchTimeCallback(availableTime) );
+    // 마우스를 누른 상태로 움직여서 요소 위로 올라올 경우 이벤트 적용
+    availableTime.addEventListener("mouseover", () => {
+      if (event.buttons === 1) {
+        patchTimeCallback(availableTime);
+      }
     });
   });
 </script>
