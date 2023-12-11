@@ -1,8 +1,8 @@
-{ %extends 'layout.html' % }
+{% extends 'layout.html' %}
 
-{ %block content % }
+{% block content %}
 <div class="group-layout">
-  <header>
+  <header class="w-full border-2 border-gray-500 rounded-sm">
     <div class="group-info">
       <div class="title">
         {{group.name}}
@@ -12,11 +12,16 @@
       </div>
     </div>
     <div class="members">
-      {{group.members.length}} / {{group.maxMember}}
+      <div class="label">
+        멤버
+      </div>
+      <div class="value">
+      {{group.Users.length}} / {{group.maxMember}}
+      </div>
     </div>
   </header>
 </div>
-{ %end block % }
+{% endblock %}
 
-{ %block script % }
-{ %end block % }
+{% block script %}
+{% endblock %}

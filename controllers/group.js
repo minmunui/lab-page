@@ -1,21 +1,34 @@
-const { Group, User } = require(process.cwd() + "/models");
-//TODO : 그룹 생성, 그룹 삭제, 그룹 수정, 그룹 조회, 그룹 멤버 조회, 그룹 멤버 추가, 그룹 멤버 삭제
+const { Group, User, GroupUser } = require(process.cwd() + "/models");
+
+const joinGroup = async (groupId, userId) => {
+  try {
+    await GroupUser.create({
+      groupId,
+      userId,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 exports.renderGroup = async (req, res, next) => {
   try {
     const groupId = req.params.id;
-    const group = await Group.findOne({
-      where: { id: groupId },
-    });
-    const groupMembers = await Group.findAll({
+    const userId = req.user.id;
+    const group = await Group.findByPk(groupId, {
       include: [
         {
           model: User,
         },
       ],
     });
-    console.log("[controller/group.js 19] group", group);
-    console.log("[controller/group.js 20] groupMembers", groupMembers);
-    res.render("group", { group, groupMembers });
+    // console.log("[controller/group.js 15] group", group);
+    // console.log("[controller/group.js 16] group.Users", group.Users);
+
+    if (group.Users.find((user) => user.id !== userId)) {
+      await joinGroup(groupId, userId);
+    }
+    res.render("group", { group });
   } catch (err) {
     console.error(err);
     next(err);
@@ -32,6 +45,7 @@ exports.createGroup = async (req, res, next) => {
       ownerId: req.user.id,
     });
     const newGroupId = group.id;
+    await joinGroup(newGroupId, req.user.id);
     res.redirect(`/group/${newGroupId}`);
   } catch (err) {
     console.error(err);
