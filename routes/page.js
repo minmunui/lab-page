@@ -28,12 +28,6 @@ router.get("/profile", isLoggedIn, renderProfile);
 
 router.get("/join", isNotLoggedIn, renderJoin);
 
-router.get("/group", isLoggedIn, renderCreateGroup);
-
-router.get("/group/:id", isLoggedIn, renderGroup);
-
-router.post("/group", isLoggedIn, createGroup);
-
 router.patch("/time", isLoggedIn, patchTime);
 
 router.get("/", renderMain);

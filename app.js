@@ -11,6 +11,8 @@ dotenv.config();
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+const groupRouter = require("./routes/group");
+
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 
@@ -32,10 +34,12 @@ sequelize
   });
 
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/img", express.static(path.join(__dirname, "uploads")));
+// static 미들웨어 사용
+app.use(express.static(path.join(__dirname, "public"))); //
+// json 미들웨어 사용
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// cookie-parser 미들웨어 사용
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
@@ -54,6 +58,7 @@ app.use(passport.session());
 app.use("/", pageRouter);
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/group", groupRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

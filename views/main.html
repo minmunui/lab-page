@@ -45,45 +45,6 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io.connect("http://localhost:8005/room", {
-    path: "/socket.io"
-  });
-
-  socket.on("newRoom", (data) => {
-    const tr = document.createElement("tr");
-    let td = document.createElement("td");
-    td.textContent = data.title;
-    tr.appendChild(td);
-    td = document.createElement("td");
-    td.textContent = data.password ? "비밀방" : "공개방";
-    tr.appendChild(td);
-    td = document.createElement("td");
-    td.textContent = data.max;
-    tr.appendChild(td);
-    td = document.createElement("td");
-    td.style.color = data.owner;
-    td.textContent = data.owner;
-    tr.appendChild(td);
-    td = document.createElement("td");
-    const button = document.createElement("button");
-    button.textContent = "입장";
-    button.dataset.password = data.password ? "true" : "false";
-    button.dataset.id = data.id;
-    button.addEventListener("click", addBtnEvent);
-    td.appendChild(button);
-    tr.appendChild(td);
-    tr.dataset.id = data.insertId;
-    document.querySelector("table tbody").appendChild(tr);
-  });
-
-  socket.on("removeRoom", (data) => {
-    document.querySelectorAll("tbody tr").forEach((tr) => {
-      if (tr.dataset.id === data) {
-        tr.parentNode.removeChild(tr);
-      }
-    });
-  });
-
   function addBtnEvent(e) {
     console.log(e.target.dataset.id)
     if (e.target.dataset.password === "true") {

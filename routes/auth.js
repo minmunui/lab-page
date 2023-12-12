@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { isLoggedIn, isNotLoggedIn } = require("../middlewares");
-const { join, login, logout } = require("../controllers/auth");
+const { join, login, logout, modifyUser } = require("../controllers/auth");
 
 const router = express.Router();
 
@@ -13,6 +13,8 @@ router.post("/login", isNotLoggedIn, login);
 
 // GET /auth/logout
 router.get("/logout", isLoggedIn, logout);
+
+router.patch("/", isLoggedIn, modifyUser);
 
 // GET /group/:id
 // router.get("/group/:id", isLoggedIn, renderGroupDetail);

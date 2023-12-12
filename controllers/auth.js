@@ -46,3 +46,27 @@ exports.logout = (req, res) => {
     res.redirect("/");
   });
 };
+
+exports.modifyUser = async (req, res, next) => {
+  const { nick, password } = req.body;
+  try {
+    const hash = await bcrypt.hash(password, 12);
+    console.log("req.user.id", req.user.id);
+    console.log("body", req.body);
+    await User.update(
+      {
+        nick,
+        password: hash,
+      },
+      {
+        where: { id: req.user.id },
+      },
+    );
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+};

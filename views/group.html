@@ -8,7 +8,7 @@
         {{group.name}}
       </div>
       <div class="owner text-center">
-        그룹장 : {{group.owner.nick}}
+        그룹장 : {{owner.nick}}
         <div class="description text-center">
           {{group.description}}
         </div>
@@ -69,6 +69,7 @@
 {% block script %}
 <script>
   const availableTimes = document.querySelectorAll(".available-time");
+  // 특정 시간으로 PATCH 요청을 보낸다. (시간, 멤버, 그룹) 정보를 담아서 보낸다. 사용가능일 경우 초록색, 불가능일 경우 빨간색으로 변경한다.
   const patchTimeCallback = (availableTime) => {
     const time = availableTime.dataset.id-1;
     const member = availableTime.parentElement.querySelector(".member-label").dataset.id;
@@ -99,6 +100,7 @@
     }
   });
   }
+
   availableTimes.forEach((availableTime) => {
     availableTime.addEventListener("mousedown", () => patchTimeCallback(availableTime) );
     // 마우스를 누른 상태로 움직여서 요소 위로 올라올 경우 이벤트 적용
