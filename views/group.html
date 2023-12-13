@@ -80,7 +80,7 @@
       groupId : group
     };
     console.log(data);
-    fetch("/time", {
+    fetch("/time", { // fetch를 통해 PATCH 요청을 보낸다.
     method: "PATCH",
       headers: {
       "Content-Type": "application/json"

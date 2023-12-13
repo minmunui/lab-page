@@ -1,13 +1,13 @@
 {
-  "name": "project-lab",
+  "name": "When To Meet",
   "version": "0.0.1",
-  "description": "프로젝트 랩",
+  "description": "웹 응용 프로그래밍 텀 프로젝트를 위해 만들어졌습니다.",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app",
     "dev": "npx tailwindcss -i ./public/main.css -o ./public/output.css --watch"
   },
-  "author": "ZeroCho",
+  "author": "minmunui",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",

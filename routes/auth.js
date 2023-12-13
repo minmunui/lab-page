@@ -16,10 +16,4 @@ router.get("/logout", isLoggedIn, logout);
 
 router.patch("/", isLoggedIn, modifyUser);
 
-// GET /group/:id
-// router.get("/group/:id", isLoggedIn, renderGroupDetail);
-
-// POST /group
-// router.post("/group", isLoggedIn, createGroup);
-
 module.exports = router;

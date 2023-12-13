@@ -4,14 +4,8 @@ const {
   renderProfile,
   renderJoin,
   renderMain,
-  renderCreateGroup,
 } = require("../controllers/page");
-const {
-  createGroup,
-  renderGroup,
-  getBelongingGroup,
-  patchTime,
-} = require("../controllers/group");
+const { getBelongingGroup, patchTime } = require("../controllers/group");
 
 const router = express.Router();
 
