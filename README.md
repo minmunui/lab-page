@@ -44,37 +44,39 @@ https://localhost:8001
 
 서비스에 접속하면 아래와 같은 화면을 볼 수 있습니다. 회원가입을 해야만, 서비스를 이용할 수 있습니다. 회원가입버튼을 눌러 회원가입을 진행합니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/c9271b82-f866-401b-8d2a-f359284fec61/Untitled.png)
+<img width="818" alt="1" src="https://github.com/minmunui/web-application-term-project/assets/82745129/b7264654-20a2-4076-85db-253ac9c04502">
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/1709ac69-8a41-49c1-ab31-58dbb077500c/Untitled.png)
+<img width="804" alt="2" src="https://github.com/minmunui/web-application-term-project/assets/82745129/96b93e98-4075-4dd3-bf6e-bd156d717e7e">
 
 회원가입 후, 로그인하면 아래와 같은 화면을 보게 됩니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/b5a579b1-e968-442e-83cc-e253cfae8a00/Untitled.png)
+<img width="815" alt="3" src="https://github.com/minmunui/web-application-term-project/assets/82745129/298e2c9c-0dad-4d1f-bcb1-38243b66649d">
+
 
 ### 그룹 생성하기
 
 그룹을 생성해야 서비스를 이용할 수 있습니다. ‘그룹 생성’을 통해 그룹을 생성합니다.
+<img width="822" alt="4" src="https://github.com/minmunui/web-application-term-project/assets/82745129/8502d38f-a466-4019-bcfd-628ff97da096">
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/e8159f2e-386c-44ae-852a-975fe4779477/Untitled.png)
 
 필요한 정보를 입력하고, 그룹을 생성합니다. 그룹을 생성하면, 해당 그룹 페이지로 자동으로 이동합니다. 그룹 페이지에는 그룹에 대한 정보, 참가함 사람들의 목록, 각 멤버들의 가능한 시간대 차트들이 표시됩니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/942503e8-aaf9-48b3-80a9-f15f0cf43233/Untitled.png)
+![5](https://github.com/minmunui/web-application-term-project/assets/82745129/baa6dfec-d984-488e-830b-2658ab81f6cd)
+
 
 메인 화면에서는 아래와 같이 나타납니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/bbc2b19e-4926-46da-a7a3-1541cb98a1b6/Untitled.png)
+<img width="793" alt="6" src="https://github.com/minmunui/web-application-term-project/assets/82745129/e73540da-7a24-4028-9f33-8f5218f35a3d">
 
 ### 그룹 참가 및 일정 기록하기
 
 회원이 특정 그룹에 입장할 경우, 자동으로 그룹에 추가되어 표가 수정됩니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/498ce645-6123-4359-ae6f-ca4b5e8b9ca4/Untitled.png)
+<img width="812" alt="7" src="https://github.com/minmunui/web-application-term-project/assets/82745129/09fee323-b6cb-480f-8bc1-f50d74ab1e70">
 
 각 블록을 클릭 및 드래그하여, 일정을 기록할 수 있습니다. 기본적으로 붉은색은 불가능한 시간대, 녹색은 가능한 시간대입니다. 타인의 시간 역시 조정이 가능하여, 이를 통해 유연하게 사용할 수 있습니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf979c83-ea45-4035-a68a-d9fa058e8a50/ea59fdfc-3819-4c39-951d-9a6dc387ab49/Untitled.png)
+<img width="609" alt="8" src="https://github.com/minmunui/web-application-term-project/assets/82745129/58acb729-9fd8-4d93-bafb-aa4c1969365f">
 
 ## 아쉬운 점
 
