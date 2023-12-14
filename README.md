@@ -10,7 +10,7 @@
 
 파일 압축을 해제하거나, 레포지토리를 클론하여 디렉터리에 저장합니다. 해제한 폴더 time-to-meet의 루트경로에서 아래 명령어를 실행해 프로젝트를 설치합니다.
 
-```jsx
+```bash
 npm start
 ```
 
@@ -18,7 +18,7 @@ npm start
 
 `config/config.json` 에서 데이터베이스 정보를 확인하여, MySQL 데이터베이스를 생성해야 합니다. 기본 데이터베이스 이름은 `whenToMeet`입니다.
 
-```jsx
+```sql
 create schema whenToMeet
 ```
 
@@ -28,13 +28,13 @@ create schema whenToMeet
 
 해당 프로젝트의 스타일이 제대로 작동하지 않을 수도 있습니다. tailwind를 통해 작성된 스타일을 적용하기 위해서는 `css`파일 추출이 필요할 수 있습니다. 아래 명령어를 통해 `css`파일을 추출합니다.
 
-```jsx
+```bash
 npm run dev
 ```
 
 모든 준비가 끝나고 아래의 주소로 접속하면 화면을 확인할 수 있습니다.
 
-```jsx
+```bash
 https://localhost:8001
 ```
 
